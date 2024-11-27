@@ -1,0 +1,80 @@
+<odoo>
+ <data>
+    <record id="view_solicitud_graduacion_tree" model="ir.ui.view">
+    <field name="name">practica.solicitud_graduacion.tree</field>
+    <field name="model">practica.solicitud_graduacion</field>
+    <field name="arch" type="xml">
+        <list string="Solicitudes de Graduación">
+            <field name="name"/>
+            <field name="numero_cuenta"/>
+            <field name="carrera"/>
+            <field name="estado"/>
+        </list>
+    </field>
+</record>
+
+
+    <record id="view_solicitud_graduacion_form" model="ir.ui.view">
+    <field name="name">practica.solicitud_graduacion.form</field>
+    <field name="model">practica.solicitud_graduacion</field>
+    <field name="arch" type="xml">
+        <form string="Solicitud de Graduación">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="numero_cuenta"/>
+                    <field name="correo_institucional"/>
+                    <field name="carrera"/>
+                    <field name="telefono"/>
+                    <field name="direccion"/>
+                    <field name="estado" readonly="1"/>
+                    <field name="comentario" readonly="1"/>
+                </group>
+                <!-- Mostrar documentos relacionados -->
+                <group string="Documentos relacionados">
+                    <field name="documentos_necesarios" readonly="1">
+                        <list>
+                            <field name="name"/>
+                            <field name="archivo_pdf" widget="binary" options="{'preview_image': 'false'}"/>
+                        </list>
+                    </field>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+    <!-- practica.solicitud_graduacion search view -->
+    <record id="practica_solicitud_graduacion_view_search" model="ir.ui.view">
+        <field name="name">practica.solicitud_graduacion.view.search</field>
+        <field name="model">practica.solicitud_graduacion</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="numero_cuenta"/>
+                <field name="estado"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_solicitud_graduacion" model="ir.actions.act_window">
+        <field name="name">Solicitudes de Graduación</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">practica.solicitud_graduacion</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primer solicitud de graduacion
+            </p>
+        </field>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="solicitud_graduacion_menu_root" name="Solicitud de Graduación" sequence="10"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="solicitud_graduacion_menu_act" name="Solicitud de Graduacion" parent="solicitud_graduacion_menu_root" action="action_solicitud_graduacion" sequence="12"/>
+ </data>
+</odoo>
