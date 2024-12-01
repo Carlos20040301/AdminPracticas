@@ -1,0 +1,57 @@
+<odoo>
+    <!-- Vista de lista -->
+    <record id="view_practica_request_list_list" model="ir.ui.view">
+        <field name="name">practica.request.list.list</field>
+        <field name="model">practica.request</field>
+        <field name="arch" type="xml">
+            <list string="Solicitudes de Práctica" class="o_list_resize">
+                <field name="account"/>
+                <field name="student_name"/>
+                <field name="career"/>
+                <field name="request_date"/>
+                <field name="state" widget="badge" decoration-success="state == 'approved'" decoration-danger="state == 'rejected'" decoration-warning="state == 'submitted'"/>
+            <!-- Botón para Aprobar (visible solo para Coordinadores) -->
+            <button name="action_approve" string="Aprobar" type="object" icon="fa-check" groups="pad.group_coordinador_carrera"/>
+            <!-- Espacio -->
+            <field name="espace" optional="hidden"/>
+            <!-- Botón para Rechazar (visible solo para Coordinadores) -->
+            <button name="action_reject" string="Rechazar" type="object" icon="fa-times" groups="pad.group_coordinador_carrera"/>
+        </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario -->
+    <record id="view_practica_request_list" model="ir.ui.view">
+        <field name="name">practica.request.list</field>
+        <field name="model">practica.request</field>
+        <field name="arch" type="xml">
+            <form string="Solicitud de Práctica">
+                <sheet>
+                     <group>
+                        <group>
+                            <field name="account"/>
+                            <field name="student_name"/>
+                            <field name="career"/>
+                        </group>
+                        <group>
+                            <field name="request_date"/>
+                            <field name="state"/> 
+                        </group>
+                    </group>               
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_practica_request" model="ir.actions.act_window">
+        <field name="name">Agregar Solicitud</field>
+        <field name="res_model">practica.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_solicitudes_root" name="Solicitudes" sequence="2"/>
+    
+    <menuitem id="menu_practica_request" name="Solicitudes de Práctica"
+              parent="menu_solicitudes_root" action="action_practica_request" sequence="10"/>
+</odoo>

@@ -1,0 +1,56 @@
+<odoo>
+    <data>
+        <record id="view_solicitud_graduacion_tree" model="ir.ui.view">
+            <field name="name">solicitud_graduacion.tree</field>
+            <field name="model">graduacion.solicitud_graduacion</field>
+            <field name="arch" type="xml">
+                <list string="Solicitudes de Graduación">
+                    <field name="name"/>
+                    <field name="numero_cuenta"/>
+                    <field name="carrera"/>
+                    <field name="estado"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_solicitud_graduacion_form" model="ir.ui.view">
+            <field name="name">solicitud_graduacion.form</field>
+            <field name="model">graduacion.solicitud_graduacion</field>
+            <field name="arch" type="xml">
+                <form string="Solicitud de Graduación">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="numero_cuenta"/>
+                            <field name="correo_institucional"/>
+                            <field name="carrera"/>
+                            <field name="telefono"/>
+                            <field name="direccion"/>
+                            <field name="estado" readonly="1"/>
+                            <field name="comentario" readonly="1"/>
+                        </group>
+                        <group string="Documentos relacionados">
+                            <field name="documentos_necesarios" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="archivo_pdf" widget="binary" options="{'preview_image': 'false'}"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción -->
+        <record id="action_solicitud_graduacion" model="ir.actions.act_window">
+            <field name="name">Agregar Solicitud</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">graduacion.solicitud_graduacion</field>
+            <field name="view_mode">list,kanban,form</field>
+        </record>
+
+        <menuitem id="menu_solicitudes_root" name="Solicitudes" sequence="3"/>
+        <menuitem id="solicitud_graduacion_menu_act" name="Solicitudes de Graduación" parent="menu_solicitudes_root" action="action_solicitud_graduacion" sequence="12"/>
+    </data>
+</odoo>

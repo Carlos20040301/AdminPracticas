@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_solicitud_graduacion,access_solicitud_graduacion,model_graduacion_solicitud_graduacion,base.group_user,1,1,1,1
+access_vista_secretaria,access_vista_secretaria,model_graduacion_vista_secretaria,base.group_user,1,1,1,1
+access_documentos_carrera,access_documentos_carrera,model_graduacion_documentos_carrera,base.group_user,1,1,1,1

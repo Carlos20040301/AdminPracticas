@@ -1,0 +1,9 @@
+<odoo>
+<!--  Grupo Secretario -->
+<record id="group_secretaria" model="res.groups">
+    <field name="name">Secretaria</field>
+    <field name="category_id" ref="base.module_category_user_type"/>
+    <!--  Categoría de Usuario  -->
+    <field name="comment">Grupo de usuarios para secretarias que gestionan las solicitudes de graduación y prácticas.</field>
+</record>
+</odoo>
