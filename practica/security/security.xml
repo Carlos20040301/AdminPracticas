@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--record de security-->
+    <record id="group_coordinador_graduaciones" model="res.groups">
+        <field name="name">Gestión de Solicitudes de Graduación</field>
+    </record>
+
+    <!--record de security-->
+    <record id="group_coordinador_practicas" model="res.groups">
+        <field name="name">Gestión de Solicitudes de Prácticas</field>
+    </record>
+
+    <record id="group_estudiantes" model="res.groups">
+        <field name="name">Gestión de Estudiantes</field>
+    </record>
+</odoo>

@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_practica_solicitud_graduacion,access_practica_solicitud_graduacion,model_practica_solicitud_graduacion,base.group_user,1,1,1,1
-access_documentos_carrera,access_practica_documentos_carrera,model_practica_documentos_carrera,base.group_user,1,1,1,1
+access_practica_solicitud_practica,access_practica_solicitud_practica,model_practica_solicitud_practica,base.group_user,1,1,1,1
+access_practica_docs_graduacion,access_practica_docs_graduacion,model_practica_docs_graduacion,base.group_user,1,1,1,1
+access_practica_docs_practica,access_practica_docs_practica,model_practica_docs_practica,base.group_user,1,1,1,1

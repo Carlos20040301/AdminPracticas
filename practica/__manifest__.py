@@ -17,16 +17,26 @@ Long description of module's purpose
     'category': 'Uncategorized',
     'version': '0.1',
 
+    'assets': {
+    'web.assets_backend': [
+        'practica/static/src/css/custom_styles.scss',
+        ],
+    },
+
     # any module necessary for this one to work correctly
     'depends': ['base'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'views/views.xml',
         'views/templates.xml',
         'views/solicitud_graduacion.xml',
-        'views/documentos_carrera.xml',
+        'views/solicitud_practica.xml',
+        'views/docs_graduacion.xml',
+        'views/docs_practica.xml',
+        #'views/coor_graduacion.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -13,6 +13,7 @@
     </field>
 </record>
 
+
     <record id="view_solicitud_graduacion_form" model="ir.ui.view">
     <field name="name">practica.solicitud_graduacion.form</field>
     <field name="model">practica.solicitud_graduacion</field>
@@ -22,7 +23,7 @@
             <!-- Botón para Pendiente -->
             <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half" class="btn btn-primary" invisible="estado == 'pendiente'"/>
             <!-- Botón para En revisión -->
-            <button name="action_revision" string="En Revisión" type="object" groups="" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'"/>
+            <button name="action_revision" string="En Revisión" type="object" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'"/>
             <!-- Botón para Aprobar -->
             <button name="action_approve" string="Aprobar" type="object" icon="fa-check" class="btn btn-success" invisible="estado == 'aprobada'"/>
             <!-- Espacio -->
@@ -37,22 +38,22 @@
                 <group colspan="6">
                     <!-- Primera columna -->
                     <group >
-                        <field name="name" class="campos_bordes"/>
-                        <field name="numero_cuenta" class="campos_bordes"/>
-                        <field name="correo_institucional" class="campos_bordes"/>
+                        <field name="name" class="campos_bordes" readonly="1"/>
+                        <field name="numero_cuenta" class="campos_bordes" readonly="1"/>
+                        <field name="correo_institucional" class="campos_bordes" readonly="1"/>
                     </group>
             
                     <!-- Segunda columna -->
                     <group>
-                        <field name="carrera" class="campos_bordes"/>
-                        <field name="correo_personal" class="campos_bordes"/>
-                        <field name="telefono" class="campos_bordes"/>
+                        <field name="carrera" class="campos_bordes" readonly="1"/>
+                        <field name="correo_personal" class="campos_bordes" readonly="1"/>
+                        <field name="telefono" class="campos_bordes" readonly="1"/>
                     </group>
                 </group>
                 <group>
                     <!-- Un solo grupo con los campos que deben estar alineados -->
                     <group colspan="6">
-                        <field name="direccion" class="campos_bordes"/>
+                        <field name="direccion" class="campos_bordes" readonly="1"/>
                         <field name="estado" readonly="1" class="campos_bordes" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'" style="color: black; font-weight: bold;"/>
                     </group>
 
@@ -100,14 +101,14 @@
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Crea tu primer solicitud de graduacion
+                Administra las solicitudes de graduación
             </p>
         </field>
     </record>
 
     <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
-    <menuitem id="solicitud_graduacion_menu_root" name="Solicitud de Graduación" sequence="10"/>
+    <menuitem id="coor_graduacion_menu_root" name="Solicitudes de Graduaciones" sequence="10"/>
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="solicitud_graduacion_menu_act" name="Solicitud de Graduacion" parent="solicitud_graduacion_menu_root" action="action_solicitud_graduacion" sequence="12"/>
+    <menuitem id="coor_graduacion_menu_act" name="Solicitudes de Graduaciones" parent="coor_graduacion_menu_root" action="action_solicitud_graduacion" sequence="12"/>
  </data>
 </odoo>

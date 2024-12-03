@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+        <!-- Vista List -->
+        <record id="view_docs_graduacion_list" model="ir.ui.view">
+            <field name="name">practica.docs_graduacion.list</field>
+            <field name="model">practica.docs_graduacion</field>
+            <field name="arch" type="xml">
+                <list string="Documentos de Graduación por Carrera">
+                    <field name="name"/>
+                    <field name="carrera"/>
+                    <field name="descripcion"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Form -->
+        <record id="view_docs_graduacion_form" model="ir.ui.view">
+            <field name="name">practica.docs_graduacion.form</field>
+            <field name="model">practica.docs_graduacion</field>
+            <field name="arch" type="xml">
+                <form string="Documentos del Proceso de Graduación">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="carrera"/>
+                            <field name="descripcion"/>
+                        </group>
+                        <group>
+                            <field name="archivo_pdf" filename="archivo_nombre"/>
+                            <field name="archivo_nombre" string="Archivo" widget="download" options="{'no_open': True}" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción -->
+        <record id="action_docs_graduacion" model="ir.actions.act_window">
+            <field name="name">Documentos de Graduación por Carrera</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">practica.docs_graduacion</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer documento de graduacion
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="docs_graduacion_menu_root" name="Documentos Graduación" sequence="10"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="docs_graduacion_menu_act" name="Documentos Graduación" parent="docs_graduacion_menu_root" action="action_docs_graduacion" sequence="12"/>
+
+    </data>
+</odoo>

@@ -4,9 +4,9 @@ from odoo.exceptions import ValidationError  # type: ignore # Esta es la importa
 
 from odoo import models, fields, api # type: ignore
 
-class SolicitudGraduacion(models.Model):
-    _name = 'practica.solicitud_graduacion'
-    _description = 'Solicitud de Graduación'
+class SolicitudPractica(models.Model):
+    _name = 'practica.solicitud_practica'
+    _description = 'Solicitud de Práctica'
 
     name = fields.Char(string='Nombre completo', required=True)
     numero_cuenta = fields.Char(string='Número de cuenta', required=True, size=11)
@@ -38,7 +38,7 @@ class SolicitudGraduacion(models.Model):
 
     # Relación Many2many con los documentos de la carrera
     documentos_necesarios = fields.Many2many(
-        'practica.docs_graduacion',
+        'practica.docs_practica',
         string='Documentos necesarios',
         compute='_compute_documentos_necesarios',
         store=True
@@ -48,7 +48,7 @@ class SolicitudGraduacion(models.Model):
     def _compute_documentos_necesarios(self):
         for record in self:
             if record.carrera:
-                documentos = self.env['practica.docs_graduacion'].search([('carrera', '=', record.carrera)])
+                documentos = self.env['practica.docs_practica'].search([('carrera', '=', record.carrera)])
                 record.documentos_necesarios = [(6, 0, documentos.ids)]  # Asigna los IDs encontrados
             else:
                 record.documentos_necesarios = [(5, 0, 0)]  # Limpia la relación si no hay carrera seleccionada
