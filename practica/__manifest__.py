@@ -24,7 +24,7 @@ Long description of module's purpose
     },
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
@@ -36,7 +36,7 @@ Long description of module's purpose
         'views/solicitud_practica.xml',
         'views/docs_graduacion.xml',
         'views/docs_practica.xml',
-        #'views/coor_graduacion.xml',
+        'views/menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

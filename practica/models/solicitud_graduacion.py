@@ -7,6 +7,7 @@ from odoo import models, fields, api # type: ignore
 class SolicitudGraduacion(models.Model):
     _name = 'practica.solicitud_graduacion'
     _description = 'Solicitud de Graduación'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Nombre completo', required=True)
     numero_cuenta = fields.Char(string='Número de cuenta', required=True, size=11)

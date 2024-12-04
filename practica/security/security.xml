@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!--record de security-->
-    <record id="group_coordinador_graduaciones" model="res.groups">
-        <field name="name">Gestión de Solicitudes de Graduación</field>
+    <record id="group_secretaria" model="res.groups">
+        <field name="name">Secretaría</field>
     </record>
 
     <!--record de security-->
-    <record id="group_coordinador_practicas" model="res.groups">
-        <field name="name">Gestión de Solicitudes de Prácticas</field>
+    <record id="group_coordinadores" model="res.groups">
+        <field name="name">Coordinadores</field>
     </record>
 
     <record id="group_estudiantes" model="res.groups">
-        <field name="name">Gestión de Estudiantes</field>
+        <field name="name">Estudiantes</field>
     </record>
 </odoo>

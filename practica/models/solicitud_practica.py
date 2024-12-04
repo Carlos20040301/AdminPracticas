@@ -7,6 +7,7 @@ from odoo import models, fields, api # type: ignore
 class SolicitudPractica(models.Model):
     _name = 'practica.solicitud_practica'
     _description = 'Solicitud de Práctica'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Nombre completo', required=True)
     numero_cuenta = fields.Char(string='Número de cuenta', required=True, size=11)
@@ -75,7 +76,7 @@ class SolicitudPractica(models.Model):
             vals['comentario_fecha'] = datetime.now()
         if 'estado' in vals and vals['estado']:
             vals['estado_fecha'] = datetime.now()
-        return super(SolicitudGraduacion, self).write(vals)
+        return super(SolicitudPractica, self).write(vals)
     
     @api.constrains('numero_cuenta')
     def _check_numero_cuenta(self):

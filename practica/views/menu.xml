@@ -1,0 +1,32 @@
+<odoo>
+    <!-- Menú principal -->
+    <menuitem id="solicitud_menu_root" name="Solicitudes" sequence="10"/>
+
+    <!-- Submenú: Solicitud de Práctica -->
+    <menuitem id="solicitud_practica_menu_act" 
+              name="Solicitud de Práctica" 
+              parent="solicitud_menu_root" 
+              action="action_solicitud_practica" 
+              sequence="12" groups="practica.group_coordinadores,practica.group_estudiantes"/>
+
+    <!-- Submenú: Documentación Solicitud de Práctica -->
+    <menuitem id="docs_practica_menu_act"
+              name="Documentos Práctica" 
+              parent="solicitud_menu_root" 
+              action="action_docs_practica" 
+              sequence="12" groups="practica.group_coordinadores"/>
+
+    <!-- Submenú: Solicitud de Graduación -->
+    <menuitem id="solicitud_graduacion_menu_act" 
+              name="Solicitud de Graduación" 
+              parent="solicitud_menu_root" 
+              action="action_solicitud_graduacion" 
+              sequence="13" groups="practica.group_secretaria,practica.group_estudiantes"/>
+
+    <!-- Submenú: Documentación Solicitud de Graduación -->
+    <menuitem id="docs_graduacion_menu_act" 
+              name="Documentos Graduación" 
+              parent="solicitud_menu_root" 
+              action="action_docs_graduacion" 
+              sequence="13" groups="practica.group_secretaria"/>
+</odoo>

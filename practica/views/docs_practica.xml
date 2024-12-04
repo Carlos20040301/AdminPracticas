@@ -50,9 +50,9 @@
         </record>
 
         <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
-    <menuitem id="docs_practica_menu_root" name="Documentos Práctica" sequence="10"/>
+    <!-- <menuitem id="docs_practica_menu_root" name="Documentos Práctica" sequence="10"/> -->
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="docs_practica_menu_act" name="Documentos Práctica" parent="docs_practica_menu_root" action="action_docs_practica" sequence="12"/>
+    <!-- <menuitem id="docs_practica_menu_act" name="Documentos Práctica" parent="docs_practica_menu_root" action="action_docs_practica" sequence="12"/> -->
 
     </data>
 </odoo>

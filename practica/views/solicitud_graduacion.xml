@@ -20,14 +20,14 @@
         <form string="Solicitud de Graduación">
         <header>
             <!-- Botón para Pendiente -->
-            <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half" class="btn btn-primary" invisible="estado == 'pendiente'"/>
+            <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half" class="btn btn-primary" invisible="estado == 'pendiente'" groups="practica.group_coordinadores,practica.group_secretaria"/>
             <!-- Botón para En revisión -->
-            <button name="action_revision" string="En Revisión" type="object" groups="" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'"/>
+            <button name="action_revision" string="En Revisión" type="object" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'" groups="practica.group_coordinadores,practica.group_secretaria"/>
             <!-- Botón para Aprobar -->
-            <button name="action_approve" string="Aprobar" type="object" icon="fa-check" class="btn btn-success" invisible="estado == 'aprobada'"/>
+            <button name="action_approve" string="Aprobar" type="object" icon="fa-check" class="btn btn-success" invisible="estado == 'aprobada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
             <!-- Espacio -->
             <!-- Botón para Rechazar -->
-            <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times" class="btn btn-danger" invisible="estado == 'rechazada'"/>
+            <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times" class="btn btn-danger" invisible="estado == 'rechazada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
             <!--<button name="action_approve" string="Aprobar" type="object" class="btn-primary" />
             <button name="action_disaprove" string="Rechazar" type="object" class="btn-secondary"/>
             <button name="action_reset" string="Reiniciar" type="object" class="btn-secondary" />-->
@@ -59,7 +59,8 @@
                     <!-- Otro grupo con los campos que deben estar alineados en la segunda columna -->
                     <group colspan="6">
                         <field name="estado_fecha" readonly="1" string="Estado cambiado el" class="campos_bordes"/>
-                        <field name="comentario" readonly="0" style="color: black; font-weight: bold;" class="campos_bordes"/>
+                        <field name="comentario" readonly="0" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                        <field name="comentario" readonly="1" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_estudiantes"/>
                         <field name="comentario_fecha" readonly="1" string="Comentario hecho el" class="campos_bordes"/>
                     </group>
                 </group>
@@ -74,6 +75,7 @@
                     </field>
                 </group>
             </sheet>
+            <chatter reload_on_post="True" reload_on_attachment="True"/>
         </form>
     </field>
 </record>
@@ -106,8 +108,10 @@
     </record>
 
     <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
-    <menuitem id="solicitud_graduacion_menu_root" name="Solicitud de Graduación" sequence="10"/>
+    <!-- <menuitem id="solicitud_graduacion_menu_root" name="Solicitudes" sequence="10"/> -->
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="solicitud_graduacion_menu_act" name="Solicitud de Graduacion" parent="solicitud_graduacion_menu_root" action="action_solicitud_graduacion" sequence="12"/>
+        <!-- <menuitem id="solicitud_practica_menu_act" name="Solicitud de Práctica" parent="solicitud_graduacion_menu_root" action="action_solicitud_practica" sequence="12"/> -->
+        <!-- <menuitem id="solicitud_graduacion_menu_act" name="Solicitud de Graduación" parent="solicitud_graduacion_menu_root" action="action_solicitud_graduacion" sequence="13"/> -->
+        <!-- <menuitem id="solicitud_practica_menu_act" name="Solicitud de Práctica" parent="solicitud_practica_menu_root" action="action_solicitud_practica" sequence="12"/> -->
  </data>
 </odoo>
