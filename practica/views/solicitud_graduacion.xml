@@ -1,17 +1,84 @@
 <odoo>
  <data>
     <record id="view_solicitud_graduacion_tree" model="ir.ui.view">
-    <field name="name">practica.solicitud_graduacion.list</field>
-    <field name="model">practica.solicitud_graduacion</field>
-    <field name="arch" type="xml">
-        <list string="Solicitudes de Graduación">
-            <field name="name"/>
-            <field name="numero_cuenta"/>
-            <field name="carrera"/>
-            <field name="estado" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'"/>
-        </list>
-    </field>
-</record>
+        <field name="name">practica.solicitud_graduacion.list</field>
+        <field name="model">practica.solicitud_graduacion</field>
+        <field name="arch" type="xml">
+            <list string="Solicitudes de Graduación">
+                <field name="name"/>
+                <field name="numero_cuenta"/>
+                <field name="carrera"/>
+                <field name="estado" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- practica.solicitud_graduacion kanban view -->
+    <record id="practica_solicitud_graduacion_view_kanban" model="ir.ui.view">
+        <field name="name">practica.solicitud_graduacion.view.kanban</field>
+        <field name="model">practica.solicitud_graduacion</field>
+        <field name="arch" type="xml">
+            <kanban string="Kanban Description">
+                <field name="name"/>
+                <field name="numero_cuenta" />
+                <field name="correo_institucional" />
+                <field name="carrera" />
+                <field name="estado" />
+                <template>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card" style="overflow: hidden">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_details">
+                                    <div class="row">
+
+                                        <!--  Nombre del empleado  -->
+                                        <div class="col-7" t-attf-class="badge #{record.estado.raw_value == 'pendiente' ? 'bg-info' : record.estado.raw_value == 'en_revision' ? 'bg-warning' : record.estado.raw_value == 'aprobada' ? 'bg-success' : record.estado.raw_value == 'rechazada' ? 'bg-danger' : 'bg-primary'}" style="color: white;">
+                                            <strong>
+                                                <t t-esc="record.name.value"/>
+                                            </strong>
+                                        </div>
+
+                                        <!--  Estado del permiso alineado a la derecha  -->
+                                        <div class="col-md-5 text-right"> 
+                                            <span t-attf-class="badge #{record.estado.raw_value == 'pendiente' ? 'bg-info' : record.estado.raw_value == 'en_revision' ? 'bg-warning' : record.estado.raw_value == 'aprobada' ? 'bg-success' : record.estado.raw_value == 'rechazada' ? 'bg-danger' : 'bg-primary'}" style="color: white;"> 
+                                                <t t-esc="record.estado.value"/> 
+                                            </span> 
+                                        </div>
+                                        <div style="margin-top: 15px; padding-left: 15px 15px">
+                                            <!--  Información de la solicitud  -->
+                                            <p>
+                                                <i class="fa fa-hashtag" title="Numero de Cuenta"/>
+                                                <strong> Numero de cuenta: </strong>
+                                                <t t-esc="record.numero_cuenta.value"/>
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-envelope" title="Correo Institucional"/>
+                                                <strong> Correo Institucional: </strong>
+                                                <t t-esc="record.correo_institucional.value"/>
+                                            </p>
+                                            <p>
+                                                <i class="fa fa-graduation-cap" title="Carrera"/>
+                                                <strong> Carrera: </strong>
+                                                <t t-esc="record.carrera.value"/>
+                                            </p>
+                                        </div>
+
+                                        <!-- Actions Butttons (aprobar, rechazar, resetear) -->
+                                        <div  class="col-12 text-center"> 
+                                            <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half"  invisible="estado == 'pendiente'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                            <button name="action_revision" string="En Revisión" type="object" icon="fa-eye"  invisible="estado == 'en_revision'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                            <button name="action_approve" string="Aprobar" type="object" icon="fa-check"  invisible="estado == 'aprobada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                            <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times"  invisible="estado == 'rechazada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </template>
+            </kanban>
+        </field>
+    </record>
 
     <record id="view_solicitud_graduacion_form" model="ir.ui.view">
     <field name="name">practica.solicitud_graduacion.form</field>

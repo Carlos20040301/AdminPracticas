@@ -1,116 +1,183 @@
 <odoo>
- <data>
-    <record id="view_solicitud_practica_tree" model="ir.ui.view">
-    <field name="name">practica.solicitud_practica.list</field>
-    <field name="model">practica.solicitud_practica</field>
-    <field name="arch" type="xml">
-        <list string="Solicitudes de Graduación">
-            <field name="name"/>
-            <field name="numero_cuenta"/>
-            <field name="carrera"/>
-            <field name="estado" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'"/>
-        </list>
-    </field>
-</record>
+    <data>
+        <record id="view_solicitud_practica_tree" model="ir.ui.view">
+            <field name="name">practica.solicitud_practica.list</field>
+            <field name="model">practica.solicitud_practica</field>
+            <field name="arch" type="xml">
+                <list string="Solicitudes de Graduación">
+                    <field name="name"/>
+                    <field name="numero_cuenta"/>
+                    <field name="carrera"/>
+                    <field name="estado" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'"/>
+                </list>
+            </field>
+        </record>
 
 
-    <record id="view_solicitud_practica_form" model="ir.ui.view">
-    <field name="name">practica.solicitud_practica.form</field>
-    <field name="model">practica.solicitud_practica</field>
-    <field name="arch" type="xml">
-        <form string="Solicitud de Graduación">
-        <header>
-            <!-- Botón para Pendiente -->
-            <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half" class="btn btn-primary" invisible="estado == 'pendiente'" groups="practica.group_coordinadores,practica.group_secretaria"/>
-            <!-- Botón para En revisión -->
-            <button name="action_revision" string="En Revisión" type="object" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'" groups="practica.group_coordinadores,practica.group_secretaria"/>
-            <!-- Botón para Aprobar -->
-            <button name="action_approve" string="Aprobar" type="object" icon="fa-check" class="btn btn-success" invisible="estado == 'aprobada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
-            <!-- Espacio -->
-            <!-- Botón para Rechazar -->
-            <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times" class="btn btn-danger" invisible="estado == 'rechazada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
-            <!--<button name="action_approve" string="Aprobar" type="object" class="btn-primary" />
-            <button name="action_disaprove" string="Rechazar" type="object" class="btn-secondary"/>
-            <button name="action_reset" string="Reiniciar" type="object" class="btn-secondary" />-->
-            <field name="estado" widget="statusbar" statusbar_visible="pendiente,en_revision,aprobada,rechazada"/>
-        </header>
-            <sheet>
-                <group colspan="6">
-                    <!-- Primera columna -->
-                    <group >
-                        <field name="name" class="campos_bordes"/>
-                        <field name="numero_cuenta" class="campos_bordes"/>
-                        <field name="correo_institucional" class="campos_bordes"/>
-                    </group>
-            
-                    <!-- Segunda columna -->
-                    <group>
-                        <field name="carrera" class="campos_bordes"/>
-                        <field name="correo_personal" class="campos_bordes"/>
-                        <field name="telefono" class="campos_bordes"/>
-                    </group>
-                </group>
-                <group>
-                    <!-- Un solo grupo con los campos que deben estar alineados -->
-                    <group colspan="6">
-                        <field name="direccion" class="campos_bordes"/>
-                        <field name="estado" readonly="1" class="campos_bordes" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'" style="color: black; font-weight: bold;"/>
-                    </group>
+        <!-- practica.solicitud_practica kanban view -->
+        <record id="practica_solicitud_practica_view_kanban" model="ir.ui.view">
+            <field name="name">practica.solicitud_practica.view.kanban</field>
+            <field name="model">practica.solicitud_practica</field>
+            <field name="arch" type="xml">
+                <kanban string="Kanban Description">
+                    <field name="name"/>
+                    <field name="numero_cuenta" />
+                    <field name="correo_institucional" />
+                    <field name="carrera" />
+                    <field name="estado" />
+                    <template>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card" style="overflow: hidden">
+                                <div class="oe_kanban_content">
+                                    <div class="o_kanban_details">
+                                        <div class="row">
 
-                    <!-- Otro grupo con los campos que deben estar alineados en la segunda columna -->
-                    <group colspan="6">
-                        <field name="estado_fecha" readonly="1" string="Estado cambiado el" class="campos_bordes"/>
-                        <field name="comentario" readonly="0" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_coordinadores,practica.group_secretaria"/>
-                        <field name="comentario" readonly="1" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_estudiantes"/>
-                        <field name="comentario_fecha" readonly="1" string="Comentario hecho el" class="campos_bordes"/>
-                    </group>
-                </group>
-                <!-- Mostrar documentos relacionados -->
-                <group string="Documentos a entregar" style="border: 1px solid #d1d1d1; border-radius: 8px; padding: 10px; background-color: #f9f9f9;">
-                    <field name="documentos_necesarios" readonly="1">
-                        <list >
-                            <field name="name" string="Nombre"/>
-                            <field name="descripcion" string="Descripción"/>
-                            <field name="archivo_nombre" string="Archivo" class="fa fa-download"/>
-                         </list>
-                    </field>
-                </group>
-            </sheet>
-            <chatter reload_on_post="True" reload_on_attachment="True"/>
-        </form>
-    </field>
-</record>
+                                            <!--  Nombre del empleado  -->
+                                            <div class="col-7" t-attf-class="badge #{record.estado.raw_value == 'pendiente' ? 'bg-info' : record.estado.raw_value == 'en_revision' ? 'bg-warning' : record.estado.raw_value == 'aprobada' ? 'bg-success' : record.estado.raw_value == 'rechazada' ? 'bg-danger' : 'bg-primary'}" style="color: white;">
+                                                <strong>
+                                                    <t t-esc="record.name.value"/>
+                                                </strong>
+                                            </div>
 
-    <!-- practica.solicitud_practica search view -->
-    <record id="practica_solicitud_practica_view_search" model="ir.ui.view">
-        <field name="name">practica.solicitud_practica.view.search</field>
-        <field name="model">practica.solicitud_practica</field>
-        <field name="arch" type="xml">
-            <search>
-                <field name="name"/>
-                <field name="numero_cuenta"/>
-                <field name="estado"/>
-            </search>
-        </field>
-    </record>
+                                            <!--  Estado del permiso alineado a la derecha  -->
+                                            <div class="col-md-5 text-right"> 
+                                                <span t-attf-class="badge #{record.estado.raw_value == 'pendiente' ? 'bg-info' : record.estado.raw_value == 'en_revision' ? 'bg-warning' : record.estado.raw_value == 'aprobada' ? 'bg-success' : record.estado.raw_value == 'rechazada' ? 'bg-danger' : 'bg-primary'}" style="color: white;"> 
+                                                    <t t-esc="record.estado.value"/> 
+                                                </span> 
+                                            </div>
+                                            <div style="margin-top: 15px; padding-left: 15px 15px">
+                                                <!--  Información de la solicitud  -->
+                                                <p>
+                                                    <i class="fa fa-hashtag" title="Numero de Cuenta"/>
+                                                    <strong> Numero de cuenta: </strong>
+                                                    <t t-esc="record.numero_cuenta.value"/>
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-envelope" title="Correo Institucional"/>
+                                                    <strong> Correo Institucional: </strong>
+                                                    <t t-esc="record.correo_institucional.value"/>
+                                                </p>
+                                                <p>
+                                                    <i class="fa fa-graduation-cap" title="Carrera"/>
+                                                    <strong> Carrera: </strong>
+                                                    <t t-esc="record.carrera.value"/>
+                                                </p>
+                                            </div>
 
-    <record id="action_solicitud_practica" model="ir.actions.act_window">
-        <field name="name">Solicitudes de Práctica</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">practica.solicitud_practica</field>
-        <field name="view_mode">list,kanban,form</field>
-        <field name="context">{}</field>
-        <field name="domain">[]</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Crea tu primer solicitud de práctica
-            </p>
-        </field>
-    </record>
+                                            <!-- Actions Butttons (aprobar, rechazar, resetear) -->
+                                            <div  class="col-12 text-center"> 
+                                                <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half"  invisible="estado == 'pendiente'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                                <button name="action_revision" string="En Revisión" type="object" icon="fa-eye"  invisible="estado == 'en_revision'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                                <button name="action_approve" string="Aprobar" type="object" icon="fa-check"  invisible="estado == 'aprobada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                                <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times"  invisible="estado == 'rechazada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </template>
+                </kanban>
+            </field>
+        </record>
 
-    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
-    <!-- <menuitem id="solicitud_practica_menu_root" name="Solicitud de Práctica" sequence="10"/> -->
-    <!-- This Menu Item must have a parent and an action -->
-    <!-- <menuitem id="solicitud_practica_menu_act" name="Solicitud de Práctica" parent="solicitud_practica_menu_root" action="action_solicitud_practica" sequence="12"/> -->
- </data>
+        <record id="view_solicitud_practica_form" model="ir.ui.view">
+            <field name="name">practica.solicitud_practica.form</field>
+            <field name="model">practica.solicitud_practica</field>
+            <field name="arch" type="xml">
+                <form string="Solicitud de Graduación">
+                <header>
+                    <!-- Botón para Pendiente -->
+                    <button name="action_pendiente" string="Pendiente" type="object" icon="fa-hourglass-half" class="btn btn-primary" invisible="estado == 'pendiente'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                    <!-- Botón para En revisión -->
+                    <button name="action_revision" string="En Revisión" type="object" icon="fa-eye" class="btn btn-warning" invisible="estado == 'en_revision'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                    <!-- Botón para Aprobar -->
+                    <button name="action_approve" string="Aprobar" type="object" icon="fa-check" class="btn btn-success" invisible="estado == 'aprobada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                    <!-- Espacio -->
+                    <!-- Botón para Rechazar -->
+                    <button name="action_disaprove" string="Rechazar" type="object" icon="fa-times" class="btn btn-danger" invisible="estado == 'rechazada'" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                    <!--<button name="action_approve" string="Aprobar" type="object" class="btn-primary" />
+                    <button name="action_disaprove" string="Rechazar" type="object" class="btn-secondary"/>
+                    <button name="action_reset" string="Reiniciar" type="object" class="btn-secondary" />-->
+                    <field name="estado" widget="statusbar" statusbar_visible="pendiente,en_revision,aprobada,rechazada"/>
+                </header>
+                    <sheet>
+                        <group colspan="6">
+                            <!-- Primera columna -->
+                            <group >
+                                <field name="name" class="campos_bordes"/>
+                                <field name="numero_cuenta" class="campos_bordes"/>
+                                <field name="correo_institucional" class="campos_bordes"/>
+                            </group>
+                    
+                            <!-- Segunda columna -->
+                            <group>
+                                <field name="carrera" class="campos_bordes"/>
+                                <field name="correo_personal" class="campos_bordes"/>
+                                <field name="telefono" class="campos_bordes"/>
+                            </group>
+                        </group>
+                        <group>
+                            <!-- Un solo grupo con los campos que deben estar alineados -->
+                            <group colspan="6">
+                                <field name="direccion" class="campos_bordes"/>
+                                <field name="estado" readonly="1" class="campos_bordes" widget="badge" decoration-success="estado == 'aprobada'" decoration-danger="estado == 'rechazada'" decoration-warning="estado == 'en_revision'" decoration-info="estado == 'pendiente'" style="color: black; font-weight: bold;"/>
+                            </group>
+
+                            <!-- Otro grupo con los campos que deben estar alineados en la segunda columna -->
+                            <group colspan="6">
+                                <field name="estado_fecha" readonly="1" string="Estado cambiado el" class="campos_bordes"/>
+                                <field name="comentario" readonly="0" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_coordinadores,practica.group_secretaria"/>
+                                <field name="comentario" readonly="1" style="color: black; font-weight: bold;" class="campos_bordes" groups="practica.group_estudiantes"/>
+                                <field name="comentario_fecha" readonly="1" string="Comentario hecho el" class="campos_bordes"/>
+                            </group>
+                        </group>
+                        <!-- Mostrar documentos relacionados -->
+                        <group string="Documentos a entregar" style="border: 1px solid #d1d1d1; border-radius: 8px; padding: 10px; background-color: #f9f9f9;">
+                            <field name="documentos_necesarios" readonly="1">
+                                <list >
+                                    <field name="name" string="Nombre"/>
+                                    <field name="descripcion" string="Descripción"/>
+                                    <field name="archivo_nombre" string="Archivo" class="fa fa-download"/>
+                                </list>
+                            </field>
+                        </group>
+                    </sheet>
+                    <chatter reload_on_post="True" reload_on_attachment="True"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- practica.solicitud_practica search view -->
+        <record id="practica_solicitud_practica_view_search" model="ir.ui.view">
+            <field name="name">practica.solicitud_practica.view.search</field>
+            <field name="model">practica.solicitud_practica</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="numero_cuenta"/>
+                    <field name="estado"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_solicitud_practica" model="ir.actions.act_window">
+            <field name="name">Solicitudes de Práctica</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">practica.solicitud_practica</field>
+            <field name="view_mode">list,kanban,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Crea tu primer solicitud de práctica
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+        <!-- <menuitem id="solicitud_practica_menu_root" name="Solicitud de Práctica" sequence="10"/> -->
+        <!-- This Menu Item must have a parent and an action -->
+        <!-- <menuitem id="solicitud_practica_menu_act" name="Solicitud de Práctica" parent="solicitud_practica_menu_root" action="action_solicitud_practica" sequence="12"/> -->
+    </data>
 </odoo>

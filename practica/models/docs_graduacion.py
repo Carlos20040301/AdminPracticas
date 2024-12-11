@@ -4,6 +4,8 @@ class DocumentosGraduacion(models.Model):
     _name = 'practica.docs_graduacion'
     _description = 'Documentos Requeridos por Carrera'
 
+    # user_id = fields.Many2one('res.users', string='Usuario', default=lambda self: self.env.user)
+
     name = fields.Char(string='Nombre', required=True)
     carrera = fields.Selection([
         ('ingenieria_sistemas', 'Ingeniería en Sistemas'),

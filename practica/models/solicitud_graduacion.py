@@ -9,6 +9,8 @@ class SolicitudGraduacion(models.Model):
     _description = 'Solicitud de Graduación'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    user_id = fields.Many2one('res.users', string='Usuario', default=lambda self: self.env.user)
+
     name = fields.Char(string='Nombre completo', required=True)
     numero_cuenta = fields.Char(string='Número de cuenta', required=True, size=11)
     correo_institucional = fields.Char(string='Correo institucional', required=True)

@@ -9,20 +9,23 @@ class SolicitudPractica(models.Model):
     _description = 'Solicitud de Práctica'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    user_id = fields.Many2one('res.users', string='Usuario', default=lambda self: self.env.user)
+
     name = fields.Char(string='Nombre completo', required=True)
     numero_cuenta = fields.Char(string='Número de cuenta', required=True, size=11)
     correo_institucional = fields.Char(string='Correo institucional', required=True)
+    #carrera_id = fields.Many2one('practica.carrera', string='Carrera', required=True)  # Cambio realizado
     carrera = fields.Selection([
-        ('ingenieria_sistemas', 'Ingeniería en Sistemas'),
-        ('ingenieria_agroindustrial', 'Ingeniería Agroindustrial'),
-        ('administracion_empresas', 'Administración de Empresas'),
-        ('desarrollo_local', 'Desarrollo Local'),
-        ('comercio_agro', 'Comercio Internacional con Orientación en Agroindustria'),
-        ('tecnologia_alimentos', 'Técnico en Tecnología de Alimentos'),
-        ('produccion_agricola', 'Técnico en Producción Agrícola'),
-        ('admin_cafetaleras', 'Técnico en Administración de Empresas Cafetaleras'),
-        ('agro_exportacion', 'Técnico en Agroexportación'),
-    ], string='Carrera', required=True)
+         ('ingenieria_sistemas', 'Ingeniería en Sistemas'),
+         ('ingenieria_agroindustrial', 'Ingeniería Agroindustrial'),
+         ('administracion_empresas', 'Administración de Empresas'),
+         ('desarrollo_local', 'Desarrollo Local'),
+         ('comercio_agro', 'Comercio Internacional con Orientación en Agroindustria'),
+         ('tecnologia_alimentos', 'Técnico en Tecnología de Alimentos'),
+         ('produccion_agricola', 'Técnico en Producción Agrícola'),
+         ('admin_cafetaleras', 'Técnico en Administración de Empresas Cafetaleras'),
+         ('agro_exportacion', 'Técnico en Agroexportación'),
+     ], string='Carrera', required=True)
     correo_personal = fields.Char(string='Correo personal', required=True)
     telefono = fields.Char(string='Número de teléfono', required=True, size=8)
     direccion = fields.Text(string='Dirección', required=True)
