@@ -1,10 +1,10 @@
 Trabajo realizado por cada estudiante:
 
 Selvin Adalid Rodriguez - : 20141900412
--En la etapa de diseño, se me asignó la tarea de elaborar el diseño del login. Sin embargo, esta funcionalidad no fue implementada directamente en la versión final del proyecto.
--Durante el desarrollo del programa, participé en la conceptualización de la vista de la lista de solicitudes, definiendo los estados y los botones que representarían la aprobación o desaprobación de dichas solicitudes.
--También trabajé en la implementación de grupos para cada tipo de usuario, separando a los usuarios comunes, como los estudiantes, de las autoridades, quienes tienen roles más específicos según las acciones que pueden realizar. Asimismo, establecí las validaciones y reglas necesarias para garantizar que cada usuario solo pudiera visualizar la información correspondiente a su rol.
--Finalmente, desarrollé las funcionalidades de búsqueda y filtrado de la lista de solicitudes, permitiendo ordenar las solicitudes según los campos deseados.
+   - En la etapa de diseño, se me asignó la tarea de elaborar el diseño del login. Sin embargo, esta funcionalidad no fue implementada directamente en la versión final del proyecto.
+   - Durante el desarrollo del programa, participé en la conceptualización de la vista de la lista de solicitudes, definiendo los estados y los botones que representarían la aprobación o desaprobación de dichas solicitudes.
+   - También trabajé en la implementación de grupos para cada tipo de usuario, separando a los usuarios comunes, como los estudiantes, de las autoridades, quienes tienen roles más específicos según las acciones que pueden realizar. Asimismo, establecí las validaciones y reglas necesarias para garantizar que cada usuario solo pudiera visualizar la información correspondiente a su rol.
+   - Finalmente, desarrollé las funcionalidades de búsqueda y filtrado de la lista de solicitudes, permitiendo ordenar las solicitudes según los campos deseados.
 
 Kenny David Garcia - 20191930116:
    - Dentro de las vistas, ayude con la integración de pequeñas funciones como: El statusbar, con el fin de darle una mejor visualización al estado en el que se encontraba la solicitud, igualmente agrege el inherit de la dependencia de "mail", para que de esta forma exista una comunicación entre el coordinador y el estudiante en caso de dudas. Asi como el desarrollo de la vista kanban para estas.
