@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_practica_request,access_practica_request,model_practica_request,base.group_user,1,1,1,1
+access_vista_coordinador,access_vista_coordinador,model_vista_coordinador,base.group_user,1,1,1,1
+
+access_practica_solicitud_graduacion,access_practica_solicitud_graduacion,model_practica_solicitud_graduacion,base.group_user,1,1,1,1
+access_documentos_carrera,access_practica_documentos_carrera,model_practica_documentos_carrera,base.group_user,1,1,1,1
+
+access_res_users,access_res_users,model_res_users,base.group_user,1,1,1,1

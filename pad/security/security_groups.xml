@@ -1,0 +1,56 @@
+<odoo> 
+    <!-- Nueva Categoría -->
+    <record id="module_category_general" model="ir.module.category">
+        <field name="name">Tipo General</field>
+        <field name="sequence">150</field>
+    </record>
+
+    <!-- Nueva Categoría -->
+    <record id="module_category_cc" model="ir.module.category">
+        <field name="name">Carrera del Coordinador</field>
+        <field name="sequence">151</field>
+    </record>
+
+    <!-- Grupo Coordinador -->
+    <record id="group_coordinador_carrera" model="res.groups">
+        <field name="name">Coordinador de carrera</field>
+        <field name="category_id" ref="module_category_general"/>
+    </record>
+
+        <!-- Grupo Secretaria -->
+    <record id="group_secretaria" model="res.groups">
+        <field name="name">Secretaria</field>
+        <field name="category_id" ref="module_category_general"/>
+    </record>
+
+        <!-- Grupo Estudiante -->
+    <record id="group_estudiante" model="res.groups">
+        <field name="name">Estudiantes</field>
+        <field name="category_id" ref="module_category_general"/>
+    </record>
+
+    <!-- Grupo Carreras -->
+    <record id="group_carrera_ing_sistemas" model="res.groups">
+        <field name="name">Ing. Sistemas</field>
+        <field name="category_id" ref="module_category_cc"/>
+    </record>
+    <record id="group_carrera_ing_civil" model="res.groups">
+        <field name="name">Ing. Civil</field>
+        <field name="category_id" ref="module_category_cc"/>
+    </record>
+    <record id="group_carrera_ing_electronica" model="res.groups">
+        <field name="name">Ing. Electrónica</field>
+        <field name="category_id" ref="module_category_cc"/>
+    </record>
+
+</odoo>
+
+        <!-- <field name="category_id" ref="base.module_category_user_type"/> Categoría de Usuario -->
+        <!-- <field name="comment">Grupo de usuarios para coordinadores que gestionan las solicitudes de prácticas.</field> -->
+
+<!-- Seguridad
+access_res_users_coordinator    ,   access_res_users_coordinator    ,   base.model_res_users         ,       module_name.group_id           ,   1,0,0,0
+Id unico (nuevo)                ,   Nombre (nuevo)                  ,    Modelo (existente)          ,       grupo creado (existente)  
+                                                                                                       ejem. (pad.group_coordinador_carrera)-->
+
+<!-- access_res_users_coordinator,access_res_users_coordinator,base.model_res_users,pad.group_coordinador_carrera,1,1,1,1 -->

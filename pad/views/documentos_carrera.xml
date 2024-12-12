@@ -1,0 +1,51 @@
+<odoo>
+    <data>
+        <!-- Vista List -->
+        <record id="view_documentos_carrera_list" model="ir.ui.view">
+            <field name="name">practica.documentos_carrera.list</field>
+            <field name="model">practica.documentos_carrera</field>
+            <field name="arch" type="xml">
+                <list string="Documentos por Carrera">
+                    <field name="name"/>
+                    <field name="carrera"/>
+                    <field name="descripcion"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Vista Form -->
+        <record id="view_documentos_carrera_form" model="ir.ui.view">
+            <field name="name">practica.documentos_carrera.form</field>
+            <field name="model">practica.documentos_carrera</field>
+            <field name="arch" type="xml">
+                <form string="Documentos por Carrera">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="carrera"/>
+                            <field name="descripcion"/>
+                        </group>
+                        <group>
+                            <field name="archivo_pdf" filename="archivo_nombre"/>
+                            <field name="archivo_nombre" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción -->
+        <record id="action_documentos_carrera" model="ir.actions.act_window">
+            <field name="name">Documentos por Carrera</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">practica.documentos_carrera</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="documentos_carrera_menu_root" name="Documentos por Carrera" sequence="3"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="documentos_carrera_menu_act" name="Documentos por Carrera" parent="documentos_carrera_menu_root" action="action_documentos_carrera" sequence="12" groups="pad.group_coordinador_carrera,pad.group_secretaria"/>
+
+    </data>
+</odoo>
