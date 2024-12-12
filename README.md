@@ -8,6 +8,11 @@ Kenny David Garcia - 20191930116:
    - Dentro de mi base de datos, es decir, con mi proyecto en local, se realizaron pruebas a modo de testeo, para la implementación de algunos de los grupos que requeriamos para identificar a los usuarios. Asi como también el desarrollo de un pequeño fragmento de código para las reglas de registro necesarias.
      
 Edwar Josue Nolasco - 20191930199:
+   - Desarrollo de la vista de Solicitud de Prácticas y Graduaciones: el formulario que llenan los estudiantes, comentarios del coordinador, los documentos descargables que le aparecen según la carrera del estudiante. 
+
+   - Desarrollo de la vista de Documentos para Prácticas y Graduaciones: el formulario que llenan los coordinadores y secretaria de los formatos de documentos, que le aparecen a los estudiantes, por ende, esa relación entre lo que sube el coordinador y ve el estudiante en cuanto a documentación.
+
+   - Diseño de los formularios, testeos de las diferentes funcionalidades.
 
 Carlos Castro - 20221900031:
    - Creación y colaboración al momento de crear y configurar el repositorio.
